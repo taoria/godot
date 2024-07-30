@@ -41,8 +41,8 @@
 
 int main(int argc, char **argv) {
 #if defined(VULKAN_ENABLED)
-	// MoltenVK - enable full component swizzling support.
-	setenv("MVK_CONFIG_FULL_IMAGE_VIEW_SWIZZLE", "1", 1);
+	setenv("MVK_CONFIG_FULL_IMAGE_VIEW_SWIZZLE", "1", 1); // MoltenVK - enable full component swizzling support.
+	setenv("MVK_CONFIG_SWAPCHAIN_MIN_MAG_FILTER_USE_NEAREST", "0", 1); // MoltenVK - use linear surface scaling. TODO: remove when full DPI scaling is implemented.
 #endif
 
 #if defined(SANITIZERS_ENABLED)
@@ -80,7 +80,7 @@ int main(int argc, char **argv) {
 	@autoreleasepool {
 		ret = Main::start();
 	}
-	if (ret) {
+	if (ret == EXIT_SUCCESS) {
 		os.run();
 	} else {
 		os.set_exit_code(EXIT_FAILURE);
